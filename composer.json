@@ -1,0 +1,13 @@
+{
+    "require": {
+        "pimple/pimple": "@stable",
+        "swiftmailer/swiftmailer": "@stable",
+        "twig/twig": "@stable",
+        "symfony/yaml": "@stable"
+    },
+    "autoload": {
+        "psr-0" : {
+            "Simplicity": "src/"
+        }
+    }
+}
