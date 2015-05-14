@@ -28,7 +28,7 @@ EOM;
     {
         $docblock = <<< EOM
 /**
- * @test    このメッセージはテストです。
+ * @test    @このメッセージはテストです。
  */
 EOM;
         $structs = Compiler::build("test", $docblock);
@@ -45,7 +45,7 @@ EOM;
     {
         $docblock = <<< EOM
 /**
- * @test [1,2]
+ * @test @[1,2]
  */
 EOM;
         $structs = Compiler::build("test", $docblock);
@@ -62,7 +62,7 @@ EOM;
     {
         $docblock = <<< EOM
 /**
- * @test [1,2] このメッセージは%sです。
+ * @test @[1,2] @このメッセージは%sです。
  */
 EOM;
         $structs = Compiler::build("test", $docblock);

@@ -54,7 +54,7 @@ class Validator
 
     public function __toString()
     {
-        print join("\n", $this->messages);
+        return join("\n", $this->messages);
     }
 
     public function validate(Array $params)
@@ -65,10 +65,14 @@ class Validator
 
             foreach($valids as $valid) {
 
+                $method     = $valid->method;
+                $condition  = $valid->params;
+                $message    = $valid->message;
+
                 // メソッドがrequiredの場合
                 if($valid->isRequired()) {
                     if(!Conditions::required($params, $key)) {
-                        $this->adderror($valid['message']);
+                        $this->adderror($message);
                     }
                 }
 
@@ -76,19 +80,18 @@ class Validator
                 elseif(in_array($key, $params_keys)) {
 
                     // AnnotationValidator\Conditionsにメソッドが存在する場合
-                    if(method_exists("Simplicity\\Library\\AnnotationValidator\\Conditions", $valid->method)) {
+                    if(method_exists("Simplicity\\Library\\AnnotationValidator\\Conditions", $method)) {
 
                         //引数無しの場合
-                        if(!isset($valid['params'])) {
-                            if(!Conditions::$$valid->method($params[$key])) {
-                                $this->adderror($valid->message);
+                        if($condition) {
+                            if(!Conditions::$method($params[$key], $condition)) {
+                                $message = (preg_match("/\%(d|s|f)/", $message)) ? sprintf($message, $condition) : $message;
+                                $this->adderror($message);
                             }
                         }
-
                         //引数無しの場合
                         else {
-                            if(!Conditions::$$valid->method($params[$key], $valid->params)) {
-                                $message = (preg_match("/\%(d|s|f)/", $valid->message)) ? sprintf($valid->message, $valid->params) : $valid->message;
+                            if(!Conditions::$method($params[$key])) {
                                 $this->adderror($message);
                             }
                         }
@@ -96,21 +99,40 @@ class Validator
 
                     // 独自メソッド・クラスの場合
                     else {
+                        //クラス::メソッドの場合
+                        if(strpos($method, "::") !== false) {
+                            list($class ,$function) = explode("::", $method);
+                            //引数有りの場合
+                            if($condition) {
+                                if(!$class::$function($params[$key], $condition)) {
+                                    $message = (preg_match("/\%(d|s|f)/", $message)) ? sprintf($message, $condition) : $message;
+                                    $this->adderror($message);
+                                }
+                            }
 
-                        //引数有りの場合
-                        if($valid->params) {
-                            if(!$$valid->method($value)) {
-                                $this->adderror($valid->message);
+                            //引数無しの場合
+                            else {
+                                if(!$class::$function($params[$key])) {
+                                    $this->adderror($message);
+                                }
                             }
                         }
-
-                        //引数無しの場合
+                        //関数の場合
                         else {
-                            if(!$$valid->method($valid->params, $params[$key])) {
-                                $message = (preg_match("/\\(d|s|f)/", $valid->message)) ? sprintf($valid->message, $valid->params) : $valid->message;
-                                $this->adderror($message);
+                            //引数有りの場合
+                            if($condition) {
+                                if(!$method($params[$key])) {
+                                    $this->adderror($message);
+                                }
                             }
 
+                            //引数無しの場合
+                            else {
+                                if(!$method($params[$key], $condition)) {
+                                    $message = (preg_match("/\%(d|s|f)/", $message)) ? sprintf($message, $condition) : $message;
+                                    $this->adderror($message);
+                                }
+                            }
                         }
                     }
                 }

@@ -26,7 +26,7 @@ class Compiler
     public static function convertToArray($comment)
     {
         return array_values(array_filter(explode("\n", $comment), function($line) {
-            return (str_replace(array("/**", "*/", "*"), "", trim($line)) !== "");
+            return (str_replace(array("/**", "*/", "*"), "", trim(mb_convert_encoding($line, "utf-8", "auto"))) !== "");
         }));
     }
 
@@ -37,17 +37,21 @@ class Compiler
      */
     public static function trimLineToArray($line)
     {
-        return array_values(
-            array_filter(
-                explode(" ",
-                    preg_replace("/\s+/", " ",
-                        preg_replace("/^\s{0,}\*\s{0,}/", "",
-                            str_replace("@", "", $line)
+        return
+            array_map(
+                function($line) {
+                    return trim($line);
+                },
+                array_values(
+                    array_filter(
+                        explode("@",
+                            trim(preg_replace("/\s+/", " ",
+                                preg_replace("/^\s{0,}\*\s{0,}/", "", trim($line))
+                            ))
                         )
                     )
                 )
-            )
-        );
+            );
     }
 
     /**

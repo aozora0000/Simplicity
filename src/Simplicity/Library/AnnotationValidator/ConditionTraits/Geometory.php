@@ -14,6 +14,8 @@ trait Geometory
 
     /**
      * 位置情報(GEO)コード 緯度のチェック (-+)90.00.....
+     * @param String $string
+     * @return bool
      */
     public static function latitude($string)
     {
