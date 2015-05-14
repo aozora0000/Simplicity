@@ -52,7 +52,9 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      * @test
      */
     public function RangeCaseSuccess() {
-
+        $this->assertTrue(self::range(1,"[1,4]"));
+        $this->assertTrue(self::range(0,"[,4]"));
+        $this->assertTrue(self::range(10,"[1,]"));
     }
 
     /**
@@ -60,7 +62,9 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function RangeCaseFailed()
     {
-        
+        $this->assertNotTrue(self::range(0,"[1,4]"));
+        $this->assertNotTrue(self::range(10,"[,4]"));
+        $this->assertNotTrue(self::range(-1,"[1,]"));
     }
 
     /**
@@ -68,7 +72,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MinCaseSuccess()
     {
-        
+        $this->assertTrue(self::min(3,"[2]"));
     }
 
     /**
@@ -76,7 +80,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MinCaseFailed()
     {
-        
+        $this->assertNotTrue(self::min(1,"[2]"));
     }
 
     /**
@@ -84,7 +88,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MaxCaseSuccess()
     {
-        
+        $this->assertTrue(self::max(1,"[2]"));
     }
 
     /**
@@ -92,7 +96,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MaxCaseFailed()
     {
-        
+        $this->assertNotTrue(self::max(10,"[2]"));
     }
 
 }

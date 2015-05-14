@@ -48,10 +48,19 @@ trait Operator
     public static function range($params, $conditions)
     {
         list($min, $max) = self::intStackCondition($conditions);
-        return (
-            ($params >= $min) &&
-            ($params <= $max)
-        );
+        $params = (int)$params;
+        if($min === 0 && $max === 0) {
+            return true;
+        } elseif($min === 0) {
+            return ($params <= $max);
+        } elseif ($max === 0) {
+            return ($params >= $min);
+        } else {
+            return (
+                ($params >= $min) &&
+                ($params <= $max)
+            );
+        }
     }
 
     /**
