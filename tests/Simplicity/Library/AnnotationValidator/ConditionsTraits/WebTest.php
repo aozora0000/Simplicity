@@ -32,7 +32,9 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function UrlCaseSuccess()
     {
-
+        $this->assertTrue(self::url("https://github.com/aozora0000/Simplicity"));
+        $this->assertTrue(self::url("http://github.com/aozora0000/Simplicity/"));
+        $this->assertTrue(self::url("file://User/Desktop"));
     }
 
     /**
@@ -40,7 +42,9 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function UrlCaseFailed()
     {
-
+        $this->assertNotTrue(self::url("git@github.com:aozora0000/Simplicity.git"));
+        $this->assertNotTrue(self::url("ssh:aozora0000@github.com"));
+        $this->assertNotTrue(self::url("ftps://root/"));
     }
 
     /**
@@ -48,6 +52,8 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function DomainCaseSuccess()
     {
+        $this->assertTrue(self::domain("github.com"));
+        $this->assertTrue(self::domain("google.com"));
 
     }
 
@@ -56,7 +62,7 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function DomainCaseFailed()
     {
-
+        $this->assertNotTrue(self::domain("192.168.0.1"));
     }
 
     /**
@@ -64,7 +70,9 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function Ipv4CaseSuccess()
     {
-
+        $this->assertTrue(self::ipv4("192.168.1.1"));
+        $this->assertTrue(self::ipv4("127.0.0.1:8080"));
+        $this->assertTrue(self::ipv4("255.255.255.1"));
     }
 
     /**
@@ -72,7 +80,9 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function Ipv4CaseFailed()
     {
-
+        $this->assertNotTrue(self::ipv4("0.0.0.1"));
+        $this->assertNotTrue(self::ipv4("127.0.0.1.xip.io"));
+        $this->assertNotTrue(self::ipv4("127.0.0.1:1"));
     }
 
     /**
@@ -80,7 +90,7 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function Ipv6CaseSuccess()
     {
-
+        $this->assertTrue(self::ipv6("fe80::6a5b:35ff:fec5:7186"));
     }
 
     /**
@@ -88,6 +98,6 @@ class WebTest extends \PHPUnit_Framework_TestCase
      */
     public function Ipv6CaseFailed()
     {
-
+        $this->assertNotTrue(self::ipv6("3e:15:c2:ab:e7:00")); //MacAddress
     }
 }
