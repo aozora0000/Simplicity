@@ -10,7 +10,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testEnumCaseSuccess()
+    public function EnumCaseSuccess()
     {
         $this->assertTrue(self::enum(1,"[0,1]"));
         $this->assertTrue(self::enum("a","[a,b,c]"));
@@ -20,7 +20,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testEnumCaseFailed()
+    public function EnumCaseFailed()
     {
         $this->assertNotTrue(self::enum(2,"[0,1]"));
         $this->assertNotTrue(self::enum("d","[a,b,c]"));
@@ -30,7 +30,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testLengthCaseSuccess()
+    public function LengthCaseSuccess()
     {
         $this->assertTrue(self::length(12345,"[0,5]"));
         $this->assertTrue(self::length("abcdefghijk","[1,]"));
@@ -41,10 +41,58 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testLengthCaseFailed()
+    public function LengthCaseFailed()
     {
         $this->assertNotTrue(self::length(12345,"[1,4]"));
         $this->assertNotTrue(self::length("abcdefghijk","[,1]"));
         $this->assertNotTrue(self::length("","[1,]"));
     }
+
+    /**
+     * @test
+     */
+    public function RangeCaseSuccess() {
+
+    }
+
+    /**
+     * @test
+     */
+    public function RangeCaseFailed()
+    {
+        
+    }
+
+    /**
+     * @test
+     */
+    public function MinCaseSuccess()
+    {
+        
+    }
+
+    /**
+     * @test
+     */
+    public function MinCaseFailed()
+    {
+        
+    }
+
+    /**
+     * @test
+     */
+    public function MaxCaseSuccess()
+    {
+        
+    }
+
+    /**
+     * @test
+     */
+    public function MaxCaseFailed()
+    {
+        
+    }
+
 }

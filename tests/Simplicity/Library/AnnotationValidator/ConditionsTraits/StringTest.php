@@ -6,10 +6,43 @@ class StringTest extends \PHPUnit_Framework_TestCase
 {
     use ConditionTraits\Common;
     use ConditionTraits\String;
+
     /**
      * @test
      */
-    public function testAlphabetCaseSuccess()
+    public function OrContainCaseSuccess()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function OrContainCaseFailed()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function AndContainCaseSuccess()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function AndContainCaseFailed()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function AlphabetCaseSuccess()
     {
         $this->assertTrue(self::alphabet("a"));
         $this->assertTrue(self::alphabet("abcdefg"));
@@ -19,7 +52,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testAlphabetCaseFailed()
+    public function AlphabetCaseFailed()
     {
         $this->assertNotTrue(self::alphabet("あ"));
         $this->assertNotTrue(self::alphabet("abc12 "));
@@ -29,7 +62,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testNumericCaseSuccess()
+    public function NumericCaseSuccess()
     {
         $this->assertTrue(self::numeric(1));
         $this->assertTrue(self::numeric(0));
@@ -40,7 +73,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testNumericCaseFailed()
+    public function NumericCaseFailed()
     {
         $this->assertNotTrue(self::numeric(0.111));
         $this->assertNotTrue(self::numeric(-1));
@@ -50,7 +83,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testAlphaNumericCaseSuccess()
+    public function AlphaNumericCaseSuccess()
     {
         $this->assertTrue(self::alphanumric("1a2b3c"));
     }
@@ -58,8 +91,40 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testAlphaNumericCaseFailed()
+    public function AlphaNumericCaseFailed()
     {
         $this->assertNotTrue(self::alphanumric("!ab23"));
+    }
+
+    /**
+     * @test
+     */
+    public function ZenkakuCaseSuccess()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function ZenkakuCaseFailed()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function HankakuCaseSuccess()
+    {
+
+    }
+
+    /**
+     * @test
+     */
+    public function HankakuCaseFailed()
+    {
+
     }
 }
