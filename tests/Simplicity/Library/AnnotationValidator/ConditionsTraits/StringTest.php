@@ -12,7 +12,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function OrContainCaseSuccess()
     {
-
+        $this->assertTrue(self::orContain("abc","[abcde,edfgh,xyz]"));
     }
 
     /**
@@ -20,7 +20,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function OrContainCaseFailed()
     {
-
+        $this->assertNotTrue(self::orContain("abc","[xyz,edfg,ab]"));
     }
 
     /**
@@ -28,7 +28,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function AndContainCaseSuccess()
     {
-
+        $this->assertTrue(self::andContain("abc","[abced,1abcd,!kdtabcd]"));
     }
 
     /**
@@ -36,7 +36,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function AndContainCaseFailed()
     {
-
+        $this->assertNotTrue(self::andContain("abc","[abced,1abcd,!kdtbcd]"));
     }
 
     /**
@@ -101,7 +101,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function ZenkakuCaseSuccess()
     {
-
+        $this->assertTrue(self::zenkaku("あいうえお"));
+        $this->assertTrue(self::zenkaku("漢字"));
+        $this->assertTrue(self::zenkaku("ＡＢＣＥＤ"));
+        $this->assertTrue(self::zenkaku("！？＜＋＝"));
     }
 
     /**
@@ -109,7 +112,9 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function ZenkakuCaseFailed()
     {
-
+        $this->assertNotTrue(self::zenkaku("123"));
+        $this->assertNotTrue(self::zenkaku("aiueo"));
+        $this->assertNotTrue(self::zenkaku("!?/.de"));
     }
 
     /**
@@ -117,7 +122,9 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function HankakuCaseSuccess()
     {
-
+        $this->assertTrue(self::hankaku("123"));
+        $this->assertTrue(self::hankaku("aiueo"));
+        $this->assertTrue(self::hankaku("!?/.de"));
     }
 
     /**
@@ -125,6 +132,9 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function HankakuCaseFailed()
     {
-
+        $this->assertNotTrue(self::hankaku("あいうえお"));
+        $this->assertNotTrue(self::hankaku("漢字"));
+        $this->assertNotTrue(self::hankaku("ＡＢＣＥＤ"));
+        $this->assertNotTrue(self::hankaku("！？＜＋＝"));
     }
 }

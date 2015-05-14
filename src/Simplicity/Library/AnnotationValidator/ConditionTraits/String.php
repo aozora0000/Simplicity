@@ -35,7 +35,7 @@ trait String
                 $bool = 0;
             }
         }
-        return !(bool)$bool;
+        return (bool)$bool;
     }
 
     /**
@@ -75,7 +75,7 @@ trait String
      */
     public static function zenkaku($string)
     {
-        return (bool)preg_match("/^[^\x00-\x7F]+$/", $string);
+        return (bool)preg_match("/^[^\x01-\x7F]+$/", $string);
     }
 
     /**
@@ -85,6 +85,6 @@ trait String
      */
     public static function hankaku($string)
     {
-        return (bool)preg-match("/^[ -~｡-ﾟ]$/",$string);
+        return (bool)preg_match("/^[\x21-\x7E]+$/",$string);
     }
 }
