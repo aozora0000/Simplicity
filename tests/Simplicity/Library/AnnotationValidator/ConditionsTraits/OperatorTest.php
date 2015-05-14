@@ -72,7 +72,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MinCaseSuccess()
     {
-        $this->assertTrue(self::min(3,"[2]"));
+        $this->assertTrue(self::greaterThan(3,"[2]"));
     }
 
     /**
@@ -80,7 +80,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MinCaseFailed()
     {
-        $this->assertNotTrue(self::min(1,"[2]"));
+        $this->assertNotTrue(self::greaterThan(1,"[2]"));
     }
 
     /**
@@ -88,7 +88,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MaxCaseSuccess()
     {
-        $this->assertTrue(self::max(1,"[2]"));
+        $this->assertTrue(self::lessThan(1,"[2]"));
     }
 
     /**
@@ -96,7 +96,7 @@ class OperatorTest extends \PHPUnit_Framework_TestCase
      */
     public function MaxCaseFailed()
     {
-        $this->assertNotTrue(self::max(10,"[2]"));
+        $this->assertNotTrue(self::lessThan(10,"[2]"));
     }
 
 }
