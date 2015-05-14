@@ -4,121 +4,75 @@ use \Simplicity\Library\AnnotationValidator\Conditions;
 
 class ConditionsTest extends \PHPUnit_Framework_TestCase
 {
-    public function testRequiredCaseSuccess()
+    protected $traits;
+
+    public function setUp()
     {
-        $this->assertTrue(Conditions::required(["a"=>1], "a"));
-        $this->assertTrue(Conditions::required(["a"=>false], "a"));
-        $this->assertTrue(Conditions::required(["a"=>0], "a"));
+        $reflection = new \ReflectionClass(new Conditions);
+        $this->traits = $reflection->getTraitNames();
     }
 
-    public function testRequiredCaseFailed()
+    /**
+     * @test
+     */
+    public function AccessTraitCalled()
     {
-        $this->assertNotTrue(Conditions::required(["b"=>1], "a"));
-        $this->assertNotTrue(Conditions::required(["a"=>null],"a"));
-        $this->assertNotTrue(Conditions::required(["a"=>""],"a"));
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Access", $this->traits);
     }
 
-    public function testAlphabetCaseSuccess()
+    /**
+     * @test
+     */
+    public function CommonTraitCalled()
     {
-        $this->assertTrue(Conditions::alphabet("a"));
-        $this->assertTrue(Conditions::alphabet("abcdefg"));
-        $this->assertTrue(Conditions::alphabet("ABcdefG"));
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Common", $this->traits);
     }
 
-    public function testAlphabetCaseFailed()
+    /**
+     * @test
+     */
+    public function DateTraitCalled()
     {
-        $this->assertNotTrue(Conditions::alphabet("あ"));
-        $this->assertNotTrue(Conditions::alphabet("abc12 "));
-        $this->assertNotTrue(Conditions::alphabet(" ab"));
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Date", $this->traits);
     }
 
-    public function testNumericCaseSuccess()
+    /**
+     * @test
+     */
+    public function GeometoryTraitCalled()
     {
-        $this->assertTrue(Conditions::numeric(1));
-        $this->assertTrue(Conditions::numeric(0));
-        $this->assertTrue(Conditions::numeric("111111"));
-        $this->assertTrue(Conditions::numeric(10 * 25));
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Geometory", $this->traits);
     }
 
-    public function testNumericCaseFailed()
+    /**
+     * @test
+     */
+    public function OperatorTraitCalled()
     {
-        $this->assertNotTrue(Conditions::numeric(0.111));
-        $this->assertNotTrue(Conditions::numeric(-1));
-        $this->assertNotTrue(Conditions::numeric(50000000000000 * 1000000));
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Operator", $this->traits);
     }
 
-    public function testAlphaNumericCaseSuccess()
+    /**
+     * @test
+     */
+    public function RequiredTraitCalled()
     {
-        $this->assertTrue(Conditions::alphanumric("1a2b3c"));
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Required", $this->traits);
     }
 
-    public function testAlphaNumericCaseFailed()
+    /**
+     * @test
+     */
+    public function StringTraitCalled()
     {
-        $this->assertNotTrue(Conditions::alphanumric("!ab23"));
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\String", $this->traits);
     }
 
-    public function testMailCaseSuccess()
+    /**
+     * @test
+     */
+    public function WebTraitCalled()
     {
-        $this->assertTrue(Conditions::mail("test@example.com"));
-        $this->assertTrue(Conditions::mail("da.me..@docomo.ne.jp")); //Docomo
-    }
-
-    public function testMailCaseFailed()
-    {
-        // Not RF2822
-        $this->assertNotTrue(Conditions::mail("Abc\@def@example.com"));
-        $this->assertNotTrue(Conditions::mail("customer/department=shipping@example.com"));
-        $this->assertNotTrue(Conditions::mail("!def!xyz%abc@example.com"));
-    }
-
-    public function testPhoneCaseSuccess()
-    {
-        $this->assertTrue(Conditions::phone("090-0000-0000"));
-        $this->assertTrue(Conditions::phone("0644441111"));
-        $this->assertTrue(Conditions::phone("072-999-9999"));
-    }
-
-    public function testPhoneCaseFailed()
-    {
-        $this->assertNotTrue(Conditions::phone("090-0a00-0000"));
-        $this->assertNotTrue(Conditions::phone("0644"));
-        $this->assertNotTrue(Conditions::phone("０７２-999-9999"));
-    }
-
-    public function testEnumCaseSuccess()
-    {
-        $this->assertTrue(Conditions::enum(1,"[0,1]"));
-        $this->assertTrue(Conditions::enum("a","[a,b,c]"));
-        $this->assertTrue(Conditions::enum("abc","[abc,bcd,cde]"));
-    }
-
-    public function testEnumCaseFailed()
-    {
-        $this->assertNotTrue(Conditions::enum(2,"[0,1]"));
-        $this->assertNotTrue(Conditions::enum("d","[a,b,c]"));
-        $this->assertNotTrue(Conditions::enum("acb","[abc,bcd,cde]"));
-    }
-
-    public function testLengthCaseSuccess()
-    {
-        $this->assertTrue(Conditions::length(12345,"[0,5]"));
-        $this->assertTrue(Conditions::length("abcdefghijk","[1,]"));
-        $this->assertTrue(Conditions::length("","[,10]"));
-        $this->assertTrue(Conditions::length("abcdefghijk","[,]"));
-    }
-
-    public function testLengthCaseFailed()
-    {
-        $this->assertNotTrue(Conditions::length(12345,"[1,4]"));
-        $this->assertNotTrue(Conditions::length("abcdefghijk","[,1]"));
-        $this->assertNotTrue(Conditions::length("","[1,]"));
-    }
-
-    public function testDateCaseSuccess()
-    {
-        $this->assertTrue(Conditions::date("2015-03-05 12:00:00", "[Y-m-d H:i:s]"));
-        $this->assertTrue(Conditions::date(2147483647, "[U]"));
-        $this->assertTrue(Conditions::date(date("F"), "[F]"));
-        //$this->assertTrue(Conditions::timestamp());
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Web", $this->traits);
     }
 }
