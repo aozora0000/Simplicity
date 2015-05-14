@@ -43,7 +43,7 @@ class Validator
         $this->prop_keys = array_keys((array)$valid);
 
         foreach($this->prop_keys as $key) {
-            $this->tree[$key] = Tree::get($key, $this->reflaction->getProperty($key)->getDocComment());
+            $this->tree[$key] = Compiler::build($key, $this->reflaction->getProperty($key)->getDocComment());
         }
     }
 
@@ -66,7 +66,7 @@ class Validator
             foreach($valids as $valid) {
 
                 // メソッドがrequiredの場合
-                if($valid['method'] === "required") {
+                if($valid->isRequired()) {
                     if(!Conditions::required($params, $key)) {
                         $this->adderror($valid['message']);
                     }
@@ -76,19 +76,19 @@ class Validator
                 elseif(in_array($key, $params_keys)) {
 
                     // AnnotationValidator\Conditionsにメソッドが存在する場合
-                    if(method_exists("Simplicity\\Library\\AnnotationValidator\\Conditions", $valid["method"])) {
+                    if(method_exists("Simplicity\\Library\\AnnotationValidator\\Conditions", $valid->method)) {
 
                         //引数無しの場合
                         if(!isset($valid['params'])) {
-                            if(!Conditions::$valid['method']($params[$key])) {
-                                $this->adderror($valid['message']);
+                            if(!Conditions::$$valid->method($params[$key])) {
+                                $this->adderror($valid->message);
                             }
                         }
 
                         //引数無しの場合
                         else {
-                            if(!Conditions::$valid['method']($params[$key], $valid['params'])) {
-                                $message = (preg_match("/\%(d|s|f)/", $valid['message'])) ? sprintf($valid['message'], $valid['params']) : $valid['message'];
+                            if(!Conditions::$$valid->method($params[$key], $valid->params)) {
+                                $message = (preg_match("/\%(d|s|f)/", $valid->message)) ? sprintf($valid->message, $valid->params) : $valid->message;
                                 $this->adderror($message);
                             }
                         }
@@ -98,16 +98,16 @@ class Validator
                     else {
 
                         //引数有りの場合
-                        if(!isset($valid['params'])) {
-                            if(!$valid['method']($value)) {
-                                $this->adderror($valid['message']);
+                        if($valid->params) {
+                            if(!$$valid->method($value)) {
+                                $this->adderror($valid->message);
                             }
                         }
 
                         //引数無しの場合
                         else {
-                            if(!$valid['method']($valid['params'], $params[$key])) {
-                                $message = (preg_match("/\\(d|s|f)/", $valid['message'])) ? sprintf($valid['message'], $valid['params']) : $valid['message'];
+                            if(!$$valid->method($valid->params, $params[$key])) {
+                                $message = (preg_match("/\\(d|s|f)/", $valid->message)) ? sprintf($valid->message, $valid->params) : $valid->message;
                                 $this->adderror($message);
                             }
 

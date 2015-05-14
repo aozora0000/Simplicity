@@ -5,13 +5,15 @@ use \Simplicity\Library\AnnotationValidator\ConditionTraits;
 class GeometoryTest extends \PHPUnit_Framework_TestCase
 {
     use ConditionTraits\Common;
+    use ConditionTraits\Geometory;
 
     /**
      * @test
      */
     public function LongitudeCaseSuccess()
     {
-
+        $this->assertTrue(self::longitude(135.52620130000003));
+        $this->assertTrue(self::longitude("+135.52620130000003"));
     }
 
     /**
@@ -19,7 +21,7 @@ class GeometoryTest extends \PHPUnit_Framework_TestCase
      */
     public function LongitudeCaseFailed()
     {
-
+        $this->assertNotTrue(self::longitude(360.00000000000));
     }
 
     /**
@@ -27,7 +29,8 @@ class GeometoryTest extends \PHPUnit_Framework_TestCase
      */
     public function LatitudeCaseSuccess()
     {
-
+        $this->assertTrue(self::latitude(34.6873153));
+        $this->assertTrue(self::latitude("+34.6873153"));
     }
 
     /**
@@ -35,22 +38,22 @@ class GeometoryTest extends \PHPUnit_Framework_TestCase
      */
     public function LatitudeCaseFailed()
     {
-
+        $this->assertNotTrue(self::latitude(135.52620130000003));
     }
 
     /**
      * @test
      */
-    public function LatlongCaseSuccess()
+    public function LatlngCaseSuccess()
     {
-
+        $this->assertTrue(self::latlng("+34.6873153, -135.52620130000003"));
     }
 
     /**
      * @test
      */
-    public function LatlongCaseFailed()
+    public function LatlngCaseFailed()
     {
-
+        $this->assertNotTrue(self::latlng("-135.52620130000003, +34.6873153"));
     }
 }

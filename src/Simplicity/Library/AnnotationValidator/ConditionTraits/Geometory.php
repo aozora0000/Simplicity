@@ -9,7 +9,7 @@ trait Geometory
      */
     public static function longitude($string)
     {
-        return (bool)preg_match("/^([-+]?([0-9]{1,2}|1[0-7][0-9]|180)([.]\d+)?)$/");
+        return (bool)preg_match("/^([-+]?([0-9]{1,2}|1[0-7][0-9]|180)([.]\d+)?)$/", $string);
     }
 
     /**
@@ -25,7 +25,7 @@ trait Geometory
      * @param String $string
      * @return bool
      */
-    public static function latlong($string) {
-        return (bool)preg_match("/^([-+]?([0-9]{1,2}|1[0-7][0-9]|180)([.]\d+)?),([-+]?([0-9]|[1-8][0-9]|90)([.]\d+)?)$/", $string);
+    public static function latlng($string) {
+        return (bool)preg_match("/^[-+]?([0-9]|[1-8][0-9]|90)([.]\d+),(\s+)[-+]?([0-9]{1,2}|1[0-7][0-9]|180)([.]\d+)$/", $string);
     }
 }
