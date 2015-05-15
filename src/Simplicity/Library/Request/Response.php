@@ -1,5 +1,5 @@
 <?php
-namespace Simplicity\Request;
+namespace Simplicity\Library\Request;
 class Responose
 {
     public static function json($object)

@@ -1,5 +1,5 @@
 <?php
-namespace Simplicity\Request;
+namespace Simplicity\Library\Request;
 use \Closure,
     \ArrayObject;
 class File

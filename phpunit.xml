@@ -21,11 +21,12 @@
     </logging>
 
     <filter>
-        <whitelist>
-            <directory suffix=".php">./src/</directory>
-        </whitelist>
         <blacklist>
             <directory suffix=".php" group="PHPUNIT">./vendor/</directory>
+            <directory suffix=".php" group="PHPUNIT">./tests/</directory>
         </blacklist>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/Simplicity/</directory>
+        </whitelist>
     </filter>
 </phpunit>
