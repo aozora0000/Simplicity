@@ -5,6 +5,10 @@
         "twig/twig": "@stable",
         "symfony/yaml": "@stable"
     },
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "phpunit/dbunit": "@stable"
+    },
     "autoload": {
         "psr-0" : {
             "Simplicity": "src/"

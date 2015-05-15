@@ -13,7 +13,8 @@ class Example extends Base
      */
     public function get()
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM `example` WHERE id=:id");
-        return $stmt->execute($this->getbind());
+        $stmt = $this->pdo->prepare("SELECT * FROM `example` WHERE id=:id LIMIT 1");
+        $stmt->execute($this->getbind());
+        return $stmt->fetch();
     }
 }
