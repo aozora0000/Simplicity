@@ -2,11 +2,14 @@
 namespace SimplicityTest\Library\Http\Response;
 use \Simplicity\Library\Http\Response\Output;
 use \Simplicity\Library\Http\Response\Header;
+use \Simplicity\Library\Http\Response\Json;
+
 
 class OutputTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
+     * @runInSeparateProcess
      */
     public function getInstance()
     {
@@ -15,6 +18,7 @@ class OutputTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @runInSeparateProcess
      */
     public function setContent()
     {
