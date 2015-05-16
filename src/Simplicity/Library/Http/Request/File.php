@@ -21,6 +21,6 @@ class File
      */
     public static function map(Closure $closure)
     {
-        return array_map($closure, Input::file());
+        return array_map($closure, array_keys(Input::file()), Input::file());
     }
 }
