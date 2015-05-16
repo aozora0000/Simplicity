@@ -18,7 +18,9 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      */
     public function setContent()
     {
+        ob_start()
         $output = Output::sendContent("{ test: true }");
+        ob_end_clean();
         $this->assertEquals("{ test: true }",$output->getContent());
     }
 
