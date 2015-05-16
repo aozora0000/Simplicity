@@ -42,7 +42,8 @@ class Base
             default:
                 $stmt = $this->pdo->query(sprintf("SHOW TABLE STATUS WHERE Name=%s",$this->table)); break;
         }
-        if($stmt->execute()) {
+        if($stmt) {
+            $stmt->execute();
             $result = $stmt->fetch();
             return $result->Auto_increment;
         } else {
