@@ -36,6 +36,7 @@ class Output
     {
         self::setInstance();
         static::$response->headers->set($key, $value);
+        return new self();
     }
 
     /**
@@ -46,6 +47,7 @@ class Output
     {
         self::setInstance();
         static::$response->setDate($date);
+        return new self();
     }
 
     /**
@@ -56,6 +58,7 @@ class Output
     {
         self::setInstance();
         static::$response->setExpires($date);
+        return new self();
     }
 
     /**
@@ -66,6 +69,7 @@ class Output
     {
         self::setInstance();
         static::$response->setContent($content);
+        return new self();
     }
 
     /**
@@ -75,6 +79,7 @@ class Output
     {
         self::setInstance();
         static::$response->setPublic();
+        return new self();
     }
     /**
      * キャッシュコントロールをpublicに設定する
@@ -83,6 +88,7 @@ class Output
     {
         self::setInstance();
         static::$response->setPrivate();
+        return new self();
     }
 
     /**
@@ -91,7 +97,7 @@ class Output
     public static function send()
     {
         self::setInstance();
-        static::$response->send();
+        return static::$response->send();
     }
 
 
@@ -103,6 +109,6 @@ class Output
         self::setHeader('Content-Length', strlen($content));
         self::setContent($content);
         static::$response->prepare(\Simplicity\Library\Http\Request\Input::getInstance());
-        self::send();
+        return self::send();
     }
 }

@@ -8,6 +8,7 @@ class Header
      *  PRAGMA:        no-cache
      *  Date:          Sat, 16 May 2015 05:10:35 GMT
      *  Expires:       Sat, 16 May 2015 05:10:35 GMT
+     *  @return \Illuminate\Http\Response
      */
     public static function noCache()
     {
@@ -16,6 +17,6 @@ class Header
         Output::setPrivate();
         Output::setDate(new \Datetime("now"));
         Output::setExpire(new \Datetime("now"));
-        Output::send();
+        return Output::getInstance();
     }
 }
