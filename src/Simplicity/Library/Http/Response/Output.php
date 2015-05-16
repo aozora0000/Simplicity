@@ -1,114 +1,19 @@
 <?php
 namespace Simplicity\Library\Http\Response;
-use \DateTime;
 /**
- * @see https://github.com/symfony/HttpFoundation/blob/master/Request.php
+ * @see https://github.com/symfony/HttpFoundation/blob/master/Response.php
  */
 class Output
 {
+    use Output\Common;
+    use Output\Status;
+    use Output\Contents;
+    use Output\Cache;
+    use Output\Date;
+    use Output\MimeType;
+    use Output\Charset;
     /**
      * @var \Illuminate\Http\Request
      */
     static $response = false;
-
-    /**
-     * レスポンスインスタンスの作成
-     */
-    private static function setInstance()
-    {
-        static::$response = static::$response?: new \Illuminate\Http\Response;
-    }
-
-    /**
-     * レスポンスインスタンスの返却
-     * @return \Illuminate\Http\Response
-     */
-    public static function getInstance()
-    {
-        self::setInstance();
-        return static::$response;
-    }
-
-    /**
-     * ヘッダー情報の格納
-     */
-    public static function setHeader($key, $value)
-    {
-        self::setInstance();
-        static::$response->headers->set($key, $value);
-        return new self();
-    }
-
-    /**
-     * 作成日時の格納
-     * @param \DateTime $date
-     */
-    public static function setDate(DateTime $date)
-    {
-        self::setInstance();
-        static::$response->setDate($date);
-        return new self();
-    }
-
-    /**
-     * 生存期限の格納
-     * @param \DateTime $date
-     */
-    public static function setExpire(DateTime $date)
-    {
-        self::setInstance();
-        static::$response->setExpires($date);
-        return new self();
-    }
-
-    /**
-     * コンテンツの格納
-     * @param String $content
-     */
-    public static function setContent($content)
-    {
-        self::setInstance();
-        static::$response->setContent($content);
-        return new self();
-    }
-
-    /**
-     * キャッシュコントロールをpublicに設定する
-     */
-    public static function setPublic()
-    {
-        self::setInstance();
-        static::$response->setPublic();
-        return new self();
-    }
-    /**
-     * キャッシュコントロールをpublicに設定する
-     */
-    public static function setPrivate()
-    {
-        self::setInstance();
-        static::$response->setPrivate();
-        return new self();
-    }
-
-    /**
-     * クライアントへ送信
-     */
-    public static function send()
-    {
-        self::setInstance();
-        return static::$response->send();
-    }
-
-
-    /**
-     * コンテンツの送信
-     * @param String $content
-     */
-    public static function sendContent($content) {
-        self::setHeader('Content-Length', strlen($content));
-        self::setContent($content);
-        static::$response->prepare(\Simplicity\Library\Http\Request\Input::getInstance());
-        return self::send();
-    }
 }

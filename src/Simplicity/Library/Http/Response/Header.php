@@ -1,5 +1,6 @@
 <?php
 namespace Simplicity\Library\Http\Response;
+use \Datetime;
 class Header
 {
     /**
@@ -15,8 +16,8 @@ class Header
         Output::setHeader('Cache-Control', 'no-cache');
         Output::setHeader('PRAGMA', 'no-cache');
         Output::setPrivate();
-        Output::setDate(new \Datetime("now"));
-        Output::setExpire(new \Datetime("now"));
+        Output::setDate(new Datetime("now"));
+        Output::setExpire(new Datetime("now"));
         return Output::getInstance();
     }
 }

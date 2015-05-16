@@ -12,6 +12,6 @@ class StorageTest extends \PHPUnit_Framework_TestCase
         $storage = new Storage;
         $storage->classes = new \ArrayObject;
         $this->assertEquals("ArrayObject",get_class($storage->classes));
-        $this->assertEmpty($storage->classes->getIterator());
+        $this->assertEmpty($storage->classes);
     }
 }
