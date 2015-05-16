@@ -3,7 +3,8 @@
         "pimple/pimple": "@stable",
         "swiftmailer/swiftmailer": "@stable",
         "twig/twig": "@stable",
-        "symfony/yaml": "@stable"
+        "symfony/yaml": "@stable",
+        "illuminate/http": "@stable"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
