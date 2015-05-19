@@ -1,9 +1,20 @@
 <?php
-// パス設定
-define("ROOT_DIR",   realpath(dirname(__FILE__)."/../"));
-define("APP_DIR",    ROOT_DIR."/include/");
-define("VENDOR_DIR", APP_DIR."/vendor/");
-define("ADMIN_DIR",  ROOT_DIR."/admin/");
+/**
+ * パス設定
+ */
+define("ROOT_DIR",   realpath(dirname(__FILE__)."/"));
+define("APP_DIR",    ROOT_DIR."/src/Simplicity/");
+define("VENDOR_DIR", APP_DIR."../../vendor/");
+define("ADMIN_DIR",  ROOT_DIR."admin/");
+
+/**
+ * 暗号化設定(COOKIE/SESSION)
+ */
+define("__SESSION__",   "SIMPLICITY_SESSSION");
+define("__COOKIE__",    "SIMPLICITY_COOKIE");
+define("__HOST__",      (isset($_SERVER['HTTP_HOST'])) ? $_SERVER['HTTP_HOST'] : "localhost:8080");
+define("__SECURE__",    false);
+define("CRYPT_HASH", "8ff770d2c4c3d56b803709e07eeb8490242ffebb2a7ca7e2f24ca6c5");
 
 /**
  * コンテナ・オートローダー

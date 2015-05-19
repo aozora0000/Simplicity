@@ -1,18 +1,19 @@
 {
     "require": {
-        "pimple/pimple": "@stable",
+        "pimple/pimple":           "@stable",
         "swiftmailer/swiftmailer": "@stable",
-        "twig/twig": "@stable",
-        "symfony/yaml": "@stable",
-        "illuminate/http": "@stable"
+        "twig/twig":               "@stable",
+        "symfony/yaml":            "@stable",
+        "illuminate/http":         "@stable",
+        "illuminate/session":      "@stable"
     },
     "require-dev": {
-        "phpunit/phpunit": "@stable",
-        "brianium/paratest": "@stable"
+        "phpunit/phpunit":         "@stable",
+        "brianium/paratest":       "@stable"
     },
     "autoload": {
         "psr-0" : {
-            "Simplicity": "src/"
+            "Simplicity":          "src/"
         }
     }
 }

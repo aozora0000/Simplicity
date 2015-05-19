@@ -61,6 +61,16 @@ class Input
         self::setInstance();
         return static::$request->getMethod();
     }
+
+    /**
+     * Cookieの取得
+     */
+    public static function cookie()
+    {
+        self::setInstance();
+        return static::$request->cookies;
+    }
+
     /**
      * XMLHttpRequestの判定
      * @return bool

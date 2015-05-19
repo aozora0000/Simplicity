@@ -1,0 +1,16 @@
+# 自動でbootstrapファイルを読み出す
+# ファイルの指定はサーバーの絶対パスになります。
+php_value auto_prepend_file "/var/www/html/bootstrap.php"
+
+# 特定ファイルを閲覧不可にする
+<Files ~ "\.(md|htaccess|gitignore|gitkeep)$">
+    deny from all
+</Files>
+
+# ディレクトリ表示不可・リライトエンジン許可
+Options -Indexes
+Options +FollowSymLinks
+RewriteEngine on
+
+# デフォルトのindexファイルを指定
+DirectoryIndex index.php

@@ -1,6 +1,21 @@
 <?php
 require dirname(__FILE__)."/../vendor/autoload.php";
 
+if(!defined("__SESSION__")) {
+    define("__SESSION__",   "SIMPLICITY_SESS");
+}
+
+if(!defined("__COOKIE__")) {
+    define("__COOKIE__",  "SIMPLICITY_COOKIE");
+}
+
+if(!defined("__SECURE__")) {
+    define("__SECURE__",  false);
+}
+
+if(!defined("__HOST__")) {
+    define("__HOST__", isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "localhost");
+}
 
 function testValid($params, $condition = null)
 {
