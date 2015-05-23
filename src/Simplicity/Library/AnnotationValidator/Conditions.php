@@ -5,7 +5,7 @@ use \Simplicity\Library\AnnotationValidator\ConditionTraits as Traits;
 class Conditions
 {
     use Traits\Required;
-    use Traits\String;
+    use Traits\Strings;
     use Traits\Operator;
     use Traits\Date;
     use Traits\Access;

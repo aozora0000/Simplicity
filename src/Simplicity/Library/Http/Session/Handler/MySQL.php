@@ -1,11 +1,10 @@
 <?php
 namespace Simplicity\Library\Http\Session\Handler;
-use \Simplicity\Model\Base;
 class MySQL implements \SessionHandlerInterface
 {
     protected $model;
 
-    public function __construct(Base $model) {
+    public function __construct(MySQLModelInterface $model) {
         $this->model = $model;
     }
 

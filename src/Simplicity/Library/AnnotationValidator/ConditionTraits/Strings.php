@@ -1,6 +1,6 @@
 <?php
 namespace Simplicity\Library\AnnotationValidator\ConditionTraits;
-trait String
+trait Strings
 {
     /**
      * 文字列が含まれるかチェック (or)
