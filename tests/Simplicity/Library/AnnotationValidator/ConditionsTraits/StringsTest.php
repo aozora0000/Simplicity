@@ -5,7 +5,7 @@ use \Simplicity\Library\AnnotationValidator\ConditionTraits;
 class StringTest extends \PHPUnit_Framework_TestCase
 {
     use ConditionTraits\Common;
-    use ConditionTraits\String;
+    use ConditionTraits\Strings;
 
     /**
      * @test
