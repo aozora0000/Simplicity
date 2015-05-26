@@ -5,7 +5,8 @@
         "twig/twig":               "@stable",
         "symfony/yaml":            "@stable",
         "illuminate/http":         "@stable",
-        "illuminate/session":      "@stable"
+        "illuminate/session":      "@stable",
+        "ginq/ginq":               "@stable"
     },
     "require-dev": {
         "phpunit/phpunit":         "@stable",

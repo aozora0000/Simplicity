@@ -1,6 +1,7 @@
 <?php
 namespace Simplicity\Library\Http\Session;
 use \Closure;
+use \Ginq;
 class Cookie
 {
     /**
@@ -145,7 +146,7 @@ class Cookie
         self::start();
         static::$cookie = new \stdClass;
         self::commit();
-        return self();
+        return new self();
     }
 
     /**
@@ -155,7 +156,9 @@ class Cookie
      */
     public static function map(Closure $closure)
     {
-        return array_map($closure, array_keys(static::$cookie), static::$cookie);
+        self::start();
+        return Ginq::from((array)static::$cookie)->map($closure)->toArray();
+        //array_map($closure, array_keys((array)static::$cookie), (array)static::$cookie);
     }
 
     /**
