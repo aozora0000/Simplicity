@@ -15,8 +15,9 @@
         </testsuite>
     </testsuites>
     <logging>
-        <log type="coverage-html" target="./build/coverage_html/" title="Test Project" charset="UTF-8" yui="true" highlight="true" lowupperbound="35" highlowerbound="70"></log>
-        <log type="coverage-clover" target="./build/coverage.xml"></log>
+        <log type="coverage-html" target="./coverage/coverage_html/" title="Test Project" charset="UTF-8" yui="true" highlight="true" lowupperbound="35" highlowerbound="70"></log>
+        <log type="coverage-clover" target="./coverage/coverage.xml"></log>
+        <log type="json" target="./coverage/coverage.json"></log>
         <log type="coverage-text" target="php://stdout"></log>
     </logging>
     <filter>

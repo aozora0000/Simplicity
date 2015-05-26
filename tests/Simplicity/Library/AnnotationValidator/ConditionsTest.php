@@ -65,7 +65,7 @@ class ConditionsTest extends \PHPUnit_Framework_TestCase
      */
     public function StringTraitCalled()
     {
-        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\String", $this->traits);
+        $this->assertContains("Simplicity\Library\AnnotationValidator\ConditionTraits\Strings", $this->traits);
     }
 
     /**
