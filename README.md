@@ -40,10 +40,47 @@ static::getInstance | コンテナを引数にしたインスタンスを取得 
 
 ---
 
-## リクエスト系
+## リクエスト・レスポンス系
 
 ### Request ```Simplicity\Library\Http\Request```
 
+***GET,POST,FILE*** 辺りの処理を行っています。
+
+#### Request ```Simplicity\Library\Http\Request\Request```
+
+GET,POSTのリクエストデータを取得できます。
+
+##### 使い方
+```
+$id = Simplicity\Library\Http\Request\Request::get("id", null);
+```
+
+##### メソッド
+名前 | 役割 | 備考
+:----:|:----:|:----:
+static::get | GET,POSTから特定の値を取得する | キー名,デフォルト値を引数に入れる
+static::getAll | GET,POSTから値を全て取得する | デフォルト値(Array)を引数に入れる
+static::map | 全てのGET,POSTの値を再帰的に加工する | 引数に変数・ラムダ関数・クロージャーを入れる
+static::filter | 全てのGET,POSTの値を再帰的にフィルタリングする | 上に同じ
+
+---
+
+#### Method ```Simplicity\Library\Http\Request\Method```
+
+リクエストメソッドを取得する
+
+##### 使い方
+```
+if(Simplicity\Library\Http\Request\Method::isAjax()) {
+    print "ajax!";
+}
+```
+
+##### メソッド
+名前 | 役割 | 備考
+:----:|:----:|:----:
+static::get | リクエストメソッドの取得 | -
+static::isAjax | Ajaxリクエストの判定 | bool値で返却
 ---
 
 ### Response ```Simplicity\Library\Http\Respose```
@@ -54,7 +91,7 @@ static::getInstance | コンテナを引数にしたインスタンスを取得 
 
 ---
 
-### Session ```Simplicity\Library\Http\Session\Cookie```
+### Session ```Simplicity\Library\Http\Session\Session```
 
 ---
 
@@ -142,5 +179,7 @@ setEngine | 利用するエンジンを決定します | Containerに格納し�
 ---
 
 ## バリデーション
+
+フォームからの入力値や
 
 ### Validator ```Simplicity\Library\Annotationvalidator\Validator```
