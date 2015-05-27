@@ -1,13 +1,20 @@
 # Simplicityウェブフレームワーク
 
-## どんなフレームワーク？
 最新型のWebフレームワークはどれもMVC形式に則った構造なので、旧世代からのレガシーなPHPスクリプトから載せ替えるにはかなりの労力が必要でした。
 
 そこでブラウザから.phpにアクセスする形式を踏襲したまま、ModelやViewを使う事を目的とした付け焼き刃的フレームワークを作ってみました。
 
-## 機能一覧
+- ユーティリティ系
+- リクエスト系
+- モデル
+- ビュー
+- バリデーション
 
-### Loader ```src/Simplicity```
+# 主要機能一覧
+
+## ユーティリティ系
+
+### Loader ```Simplicity\Loader```
 コンテナ内包のクラスを呼び出します。
 
 #### 使い方
@@ -16,8 +23,8 @@ $container = new Pimple\Container;
 $container['db'] = function() {
     return new PDO("sqlite::memory", null, null);
 };
-Loader::registContainer($container);
-$model = Loader::getInstance('Simplicity\Model\Example');
+Simplicity\Loader::registContainer($container);
+$model = Simplicity\Loader::getInstance('Simplicity\Model\Example');
 ```
 
 #### プロパティ
@@ -31,8 +38,30 @@ static::$container | コンテナを格納 | -
 static::registContainer | コンテナを格納 | 引数にコンテナを格納する
 static::getInstance | コンテナを引数にしたインスタンスを取得 | 呼び出す場合には要コンストラクタ引数
 
+---
 
-### Model ```src/Simplicity/Model```
+## リクエスト系
+
+### Request ```Simplicity\Library\Http\Request```
+
+---
+
+### Response ```Simplicity\Library\Http\Respose```
+
+---
+
+### Cookie ```Simplicity\Library\Http\Session\Cookie```
+
+---
+
+### Session ```Simplicity\Library\Http\Session\Cookie```
+
+---
+
+## モデル
+
+### Model ```Simplicity\Model\*```
+
 PDOクラスを内包したクラスです。
 
 ***Simplicity\Model\Base***クラスを継承します。
@@ -60,3 +89,58 @@ $table | テーブル名 | PHPクラス名を小文字化したテーブル名�
 __construct | プロパティ初期化 | 引数にPimple\Containerを想定しています
 getbind | バインドパラメータ作成 | [[":{$key}": $value],]形式の配列を返します
 getNextID | テーブルの次IDを返却 | 次のインクリメント値を返します
+
+---
+
+## ビュー
+
+### View
+
+各種テンプレートエンジンに対応したビューを利用出来ます。
+
+テンプレートエンジンの切り替えはコンテナ格納時に行います。
+
+***Simplicity\View\Base***抽象クラスを継承します。
+
+#### 使い方
+***bootstrap.php***
+```
+$container = new Pimple\Container;
+$container['view.pc'] = function() use ($container) {
+    \Twig_Autoloader::register();
+    $loader = new Twig_Loader_Filesystem(APP_DIR.'.templates/pc/');
+    return new \Twig_Environment($loader);
+};
+$container['view.sp'] = function() use ($container) {
+    \Twig_Autoloader::register();
+    $loader = new Twig_Loader_Filesystem(APP_DIR.'.templates/sp/');
+    return new \Twig_Environment($loader);
+};
+```
+***index.php***
+```
+$view  = Simplicity\Loader::getInstance("Simplicity\View\Twig");
+$view->setEngine("view.pc");
+$view->title = "インデックスページ";
+$view->render(".index.html.twig");
+```
+
+#### プロパティ
+ 名前 | 内容 | 備考
+:----:|:----:|:----:
+$container | Container | Containerを格納
+$obj | Array | setterを通してテンプレートエンジンにアサインする値を格納・取得します
+$engine | Closure | 利用するテンプレートエンジンを決定します
+
+#### メソッド
+ 名前 | 役割 | 備考
+:----:|:----:|:----:
+__construct | プロパティ初期化 | 引数にPimple\Containerを想定しています
+setEngine | 利用するエンジンを決定します | Containerに格納した時のキー名を引数とします
+*render | レンダリングを実行します | 抽象メソッドになっています。ファイル名を引数にレンダリングまで実行。
+
+---
+
+## バリデーション
+
+### Validator ```Simplicity\Library\Annotationvalidator\Validator```
