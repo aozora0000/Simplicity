@@ -17,6 +17,10 @@ if(!defined("__HOST__")) {
     define("__HOST__", isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "localhost");
 }
 
+if(!defined("STORAGE_PATH")) {
+    define("STORAGE_PATH", __DIR__."/files/");
+}
+
 function testValid($params, $condition = null)
 {
     return true;
