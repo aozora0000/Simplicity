@@ -5,6 +5,7 @@
 define("ROOT_DIR",   realpath(dirname(__FILE__)."/"));
 define("APP_DIR",    ROOT_DIR."/src/Simplicity/");
 define("VENDOR_DIR", APP_DIR."../../vendor/");
+define("CONFIG_DIR", APP_DIR."Config/");
 define("ADMIN_DIR",  ROOT_DIR."admin/");
 
 /**
@@ -85,4 +86,5 @@ $container['view'] = function() use ($container) {
 /**
  * 要コンテナアプリケーション設定
  */
-Simplicity\Loader::registContainer($container);
+Simplicity\Application::registContainer($container);
+Simplicity\Application::registerAlias(yaml_parse(file_get_contents(CONFIG_DIR . "alias.yml")));
