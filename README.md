@@ -1,5 +1,7 @@
 # Simplicityウェブフレームワーク
 
+[![Build Status](https://travis-ci.org/aozora0000/Simplicity.svg)](https://travis-ci.org/aozora0000/Simplicity)
+
 最新型のWebフレームワークはどれもMVC形式に則った構造なので、旧世代からのレガシーなPHPスクリプトから載せ替えるにはかなりの労力が必要でした。
 
 そこでブラウザから.phpにアクセスする形式を踏襲したまま、ModelやViewを使う事を目的とした付け焼き刃的フレームワークを作ってみました。
