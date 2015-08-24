@@ -16,7 +16,7 @@
 
 ## ユーティリティ系
 
-### Loader ```Simplicity\Loader```
+### Application ```Simplicity\Application```
 コンテナ内包のクラスを呼び出します。
 
 #### 使い方
@@ -25,8 +25,8 @@ $container = new Pimple\Container;
 $container['db'] = function() {
     return new PDO("sqlite::memory", null, null);
 };
-Simplicity\Loader::registContainer($container);
-$model = Simplicity\Loader::getInstance('Simplicity\Model\Example');
+Simplicity\Application::registContainer($container);
+$model = Simplicity\Loader::get('Simplicity\Model\Example');
 ```
 
 #### プロパティ
@@ -108,7 +108,7 @@ PDOクラスを内包したクラスです。
 #### 使い方
 
 ```
-$example = Loader::getInstance('Simplicity\Model\Example');
+$example = Application::getInstance('Simplicity\Model\Example');
 $example->name = "Kohei Kinoshita";
 $example->age  = 30;
 $example->save();
@@ -158,7 +158,7 @@ $container['view.sp'] = function() use ($container) {
 ```
 ***index.php***
 ```
-$view  = Simplicity\Loader::getInstance("Simplicity\View\Twig");
+$view  = Simplicity\Application::getInstance("Simplicity\View\Twig");
 $view->setEngine("view.pc");
 $view->title = "インデックスページ";
 $view->render(".index.html.twig");
