@@ -2,6 +2,12 @@
 namespace SimplicityTest\Model;
 use \Simplicity\Model\Base;
 
+/**
+ * Class BaseTest
+ * @package SimplicityTest\Model
+ * @group Model
+ * @group UNIT
+ */
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
     protected $model;

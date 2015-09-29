@@ -1,0 +1,5 @@
+---
+    Application: Simplicity\Application
+    Input: Simplicity\Library\Http\Request\Input
+    Session: Simplicity\Library\Session\Session
+    Cookie: Simplicity\Library\Session\Cookie

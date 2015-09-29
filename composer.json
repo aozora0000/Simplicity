@@ -5,6 +5,7 @@
         "twig/twig":               "@stable",
         "symfony/yaml":            "@stable",
         "illuminate/http":         "@stable",
+        "Illuminate/filesystem":   "@stable",
         "illuminate/session":      "@stable",
         "ginq/ginq":               "@stable"
     },

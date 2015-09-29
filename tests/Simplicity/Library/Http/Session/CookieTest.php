@@ -1,6 +1,12 @@
 <?php
 namespace SimplicityTest\Library\Http\Session;
 use \Simplicity\Library\Http\Session\Cookie;
+
+/**
+ * Class CookieTest
+ * @package SimplicityTest\Library\Http\Session
+ * @group Session
+ */
 class CookieTest extends \PHPUnit_Framework_TestCase
 {
     /**

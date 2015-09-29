@@ -1,11 +1,12 @@
 <?php
 namespace SimplicityTest\Library\AnnotationValidator\ConditionTraits;
-use \Simplicity\Library\AnnotationValidator\ConditionTraits;
+use \Simplicity\Library\AnnotationValidator\ConditionTraits\Access;
+use \Simplicity\Library\AnnotationValidator\ConditionTraits\Common;
 
 class AccessTest extends \PHPUnit_Framework_TestCase
 {
-    use ConditionTraits\Access;
-    use ConditionTraits\Common;
+    use Access;
+    use Common;
 
     /**
      * @test
